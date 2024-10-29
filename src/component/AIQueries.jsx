@@ -5,14 +5,23 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 const AIQueries = () => {
   const inputRef = useRef(null);
   const [queryNo, setQueryNo] = useState(0);
-  const [gender, setGender] = useState("");
-  const [age, setAge] = useState("");
-  const [hrs, setHours] = useState("");
-  const [occupation, setOccupation] = useState("");
-  const [weight, setWeight] = useState("");
-  const [height, setHeight] = useState("");
-  const [systolicBP, setSystolicBP] = useState("");
-  const [diastolicBP, setDiastolicBP] = useState("");
+  const [formData, setFormData] = useState({
+    gender: "",
+    age: "",
+    hours: "",
+    occupation: "",
+    weight: "",
+    height: "",
+    systolicBP: "",
+    diastolicBP: "",
+  });
+
+  const handleInput = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const addClick = () => {
     setQueryNo((prev) => prev + 1);
@@ -22,45 +31,31 @@ const AIQueries = () => {
   };
 
   const handleButtonClick = (e) => {
+    let updatedValue = {};
+    updatedValue = { gender: e.target.value };
     e.preventDefault();
     addClick();
-    const value = e.target.value;
-    setAge(value);
-    console.log(value);
+    setFormData((prev) => ({ ...prev, ...updatedValue }));
   };
-
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setAge(value);
-    setHours(value);
-    setOccupation(value);
-    setWeight(value);
-    setHeight(value);
-    setSystolicBP(value);
-    setDiastolicBP(value);
-  };
-  console.log(age);
-  console.log("i am " + `${age}` + " years old");
-  console.log(hrs);
-  console.log(occupation);
-  console.log(weight);
-  console.log(height);
-  console.log(systolicBP);
-  console.log(diastolicBP);
 
   const handleLeftClick = () => {
     queryNo > 0 ? subClick() : null;
   };
 
   const handleSubmitClick = () => {
+    let written = inputRef.current.value;
     inputRef.current.value = "";
-    queryNo < Query.length - 1 ? addClick() : queryNo;
+
+    if (written) {
+      queryNo < Query.length - 1 ? addClick() : queryNo;
+    }
   };
 
+  console.log(formData);
   return (
-    <div className="h-[100svh] pt-[2rem] flex flex-col  ">
+    <div className="h-[100svh] pb-[.5rem] flex flex-col  justify-between">
       <div className="flex w-full items-center">
-        <div className="bg-black w-[12%] h-[40px] rounded-lg flex justify-center items-center m-[.7rem] mx-[1rem] ">
+        <div className="bg-black w-[12%] h-[40px] rounded-lg flex justify-center items-center my-[1rem] mx-[1rem] ">
           <FaArrowLeft
             onClick={() => handleLeftClick()}
             className="text-white text-[25px] "
@@ -79,7 +74,7 @@ const AIQueries = () => {
         )} */}
       </div>
 
-      <div className="mt-[2rem] mx-[1rem] flex flex-col ">
+      <div className="my-[.5rem] mx-[1rem] flex flex-col ">
         <div className="bg-slate-200 w-[100%] h-[9px] rounded-xl flex">
           {queryNo === 0 ? (
             <div className="w-[14.2%] h-[9px] bg-orange-500 rounded-xl"></div>
@@ -113,9 +108,9 @@ const AIQueries = () => {
             </>
           ) : null}
         </div>
-        <div className="mt-[2rem] flex items-center  justify-between h-[70svh] flex-col">
+        <div className="my-[2rem] flex items-center  justify-between h-[70svh] flex-col">
           {Query[queryNo].type === "option" ? (
-            <div className="px-[.3rem] pb-[.2rem] flex flex-col  w-[21rem]">
+            <div className="px-[.5rem] pb-[.5rem] flex flex-col  w-[21rem]">
               <form>
                 <p className="font-m800 text-[2.5rem] mt-[.5rem] ">
                   {Query[queryNo].question}
@@ -130,7 +125,7 @@ const AIQueries = () => {
                   </button>
                   <button
                     value={Query[queryNo].option[1]}
-                    onClick={handleButtonClick}
+                    onClick={handleInput}
                     className="placeholder:text-black bg-slate-100 focus:border-[1px] py-[1rem] px-[2rem] rounded-2xl text-[1.5rem] shadow-md focus:shadow-none"
                   >
                     {Query[queryNo].option[1]}
@@ -138,8 +133,47 @@ const AIQueries = () => {
                 </div>
               </form>
             </div>
+          ) : Query[queryNo].type === "select" ? (
+            <div className="px-[.5rem] pb-[.5rem] flex flex-col  w-[21rem]">
+              <form>
+                <p className="font-m800 text-[2.5rem] mt-[.5rem] ">
+                  {Query[queryNo].question}
+                </p>
+                <div className="mt-[1rem] flex flex-col gap-[20px]">
+                  <label className="custom-select">
+                    <select
+                      ref={inputRef}
+                      name=""
+                      id
+                      className="text-black bg-slate-100 focus:border-[1px] py-[1rem] px-[2rem] rounded-2xl text-[1.5rem] shadow-md focus:shadow-none"
+                    >
+                      <option onClick={handleInput}>
+                        {Query[queryNo].option1}
+                      </option>
+                      <option onClick={handleInput}>
+                        {Query[queryNo].option2}
+                      </option>
+                      <option onClick={handleInput}>{Query[queryNo].option3}</option>
+                      <option onClick={handleInput}>{Query[queryNo].option4}</option>
+                      <option onClick={handleInput}>{Query[queryNo].option5}</option>
+                      <option onClick={handleInput}>{Query[queryNo].option6}</option>
+                      <option onClick={handleInput}>{Query[queryNo].option7}</option>
+                      <option onClick={handleInput}>{Query[queryNo].option8}</option>
+                      <option onClick={handleInput}>{Query[queryNo].option9}</option>
+                      <option onClick={handleInput}>{Query[queryNo].option10}</option>
+                    </select>
+                  </label>
+                  <button
+                    onClick={handleSubmitClick}
+                    className="placeholder:text-black bg-slate-100 focus:border-[1px] py-[1rem] px-[2rem] rounded-2xl text-[1.5rem] shadow-md focus:shadow-none mt-[2rem] text-center"
+                  >
+                    Next
+                  </button>
+                </div>
+              </form>
+            </div>
           ) : (
-            <div className="px-[.3rem] pb-[.2rem] flex flex-col  w-[21rem]">
+            <div className="px-[.5rem] pb-[.5rem] flex flex-col  w-[21rem]">
               <form className="flex flex-col">
                 <p className="font-m800 text-[2.0rem] mt-[.5rem] ">
                   {Query[queryNo].question}
@@ -147,8 +181,9 @@ const AIQueries = () => {
                 <div className="mt-[1rem] flex flex-col gap-[20px] items-center justify-center">
                   <div className="flex relative">
                     <input
+                      onChange={handleInput}
+                      name={Query[queryNo].name}
                       ref={inputRef}
-                      onChange={handleInputChange}
                       type="text"
                       required
                       className="text-black border-[2px] border-slate-300 focus:border-[1px] focus:border-slate-5008 py-[1rem] px-[2rem] rounded-2xl text-[1.5rem] w-[100%] relative"
@@ -159,12 +194,12 @@ const AIQueries = () => {
                     </div>
                   </div>
                 </div>
-                <div
+                <button
                   onClick={handleSubmitClick}
                   className="placeholder:text-black bg-slate-100 focus:border-[1px] py-[1rem] px-[2rem] rounded-2xl text-[1.5rem] shadow-md focus:shadow-none mt-[2rem] text-center"
                 >
                   Next
-                </div>
+                </button>
               </form>
             </div>
           )}

@@ -1,11 +1,3 @@
-// export const Query = [
-//   {
-//     Query1: { id: 1, Question: "Gender ?", Answer1: "Male", Answer2: "Female" },
-//     Query2: { id: 2, Question: "How many Hours do you Sleep ?" },
-//     Query3: { id: 3 },
-//   },
-// ];
-
 export const Query = [
   {
     id: 0,
@@ -16,41 +8,58 @@ export const Query = [
   {
     id: 1,
     question: "How old are you ?",
+    name: "age",
     unit: "year old",
     type: "input",
   },
 
   {
     id: 2,
+    name: "hours",
     question: "How many Hours do you Sleep ?",
     unit: "hours",
     type: "input",
   },
   {
     id: 3,
+    name: "occupation",
     question: "What is your Occupation ?",
-    type: "input",
+    type: "select",
+    option1: "Accountant",
+    option2: "Doctor",
+    option3: "Engineer",
+    option4: "Lawyer",
+    option5: "Manager",
+    option6: "Nurse",
+    option7: "Sales",
+    option8: "Scientist",
+    option9: "Software Engineer",
+    option10: "Teacher",
   },
   {
     id: 4,
+    name: "weight",
     question: "What is your Weight ?",
     type: "input",
     unit: "kg",
   },
   {
     id: 5,
+    name: "height",
     question: "What is your Height ?",
     type: "input",
     unit: "feet",
   },
   {
     id: 6,
+    name: "systolicBp",
     question: "What is your Systolic BP ?",
     type: "input",
     unit: "mmHg",
   },
   {
     id: 7,
+    name: "diastolicBp",
     question: "What is your Diastolic BP ?",
     type: "input",
     unit: "mmHg",

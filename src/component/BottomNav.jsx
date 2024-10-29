@@ -2,7 +2,7 @@ import { bottomNav } from "../data/bottomNav";
 import { Link } from "react-router-dom";
 const BottomNav = () => {
   return (
-    <div className="flex px-8  pt-4 justify-between fixed bg-[--tertiaryBody-color] w-[100%] bottom-0 text-2xl md:*:hidden">
+    <div className="lg:hidden flex px-8  pt-4 justify-between fixed bg-[--tertiaryBody-color] w-[100%] bottom-0 text-2xl md:*:hidden">
       {bottomNav.map((bottomNavItem) => (
         <Link key={bottomNavItem.id} to={bottomNavItem.link}>
           <div className="flex flex-col items-center ">

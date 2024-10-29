@@ -5,6 +5,7 @@ import MyPage from "./pages/MyPage";
 import AiPage from "./pages/AiPage";
 import NavRouter from "./route/NavRouter";
 import AIQuery from "./component/AIQueries";
+import WorkoutPage from "./pages/WorkoutPage";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -23,7 +24,6 @@ const App = () => {
           <AiPage />
         </NavRouter>
       ),
-
     },
     {
       path: "notificationPage",
@@ -44,6 +44,10 @@ const App = () => {
     {
       path: "Aipage/aiQuery",
       element: <AIQuery />,
+    },
+    {
+      path: "/workout",
+      element: <WorkoutPage />,
     },
   ]);
 

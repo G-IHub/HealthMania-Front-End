@@ -41,20 +41,53 @@ body {
   background-color: white;
   border: 1px solid #e0e0e0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
   border-radius: 8px;
 }
 
 .purple {
   background: linear-gradient(to bottom, #e0bbff, #d1a3ff);
 }
-/* .box-shadow {
-  box-shadow: 0 0 6px 12px #f5f5f5;
-} */
+
 .montserrat {
   font-family: "myFont";
   font-optical-sizing: auto;
   font-weight: 100;
+}
+
+/* select css */
+.custom-select {
+  position: relative;
+  width: 100%; /* Adjust as needed */
+}
+
+.custom-select select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  width: 100%; /* Full width of the select container */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1.5rem;
+  color: black;
+  border: 1px solid #ccc;
+}
+
+/* Add custom arrow */
+.custom-select::after {
+  content: '▼'; /* Custom arrow symbol */
+  font-size: 1.5rem;
+  color: #333;
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  pointer-events: none; /* To ensure the arrow doesn't block click events */
+}
+
+.custom-select select:focus {
+  box-shadow: none;
 }
 
 @layer base {
