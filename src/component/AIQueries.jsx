@@ -1,28 +1,39 @@
 import { Query } from "@/data/AiQuery";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
-
 const AIQueries = () => {
   const inputRef = useRef(null);
+  const [weight, setWeight] = useState(0);
+  const [height, setHeight] = useState(0);
   const [queryNo, setQueryNo] = useState(0);
-  const [formData, setFormData] = useState({
-    gender: "",
-    age: "",
-    hours: "",
-    occupation: "",
-    weight: "",
-    height: "",
-    systolicBP: "",
-    diastolicBP: "",
-  });
+  const [formData, setFormData] = useState({});
+
+  useEffect(() => {
+    if (weight > 0 && height > 0) {
+      const bmi = weight / Math.pow(height, 2); // Assuming height is in cm
+      setFormData((prev) => ({
+        ...prev,
+        ["BMI"]: (Math.floor(bmi * 10) / 10).toString(),
+      }));
+    }
+  }, [weight, height]);
 
   const handleInput = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    if (name === "weight") {
+      setWeight(parseFloat(value));
+    } else if (name === "height") {
+      setHeight(parseFloat(value));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
+  console.log(weight);
+  console.log(height);
   const addClick = () => {
     setQueryNo((prev) => prev + 1);
   };
@@ -31,9 +42,9 @@ const AIQueries = () => {
   };
 
   const handleButtonClick = (e) => {
+    e.preventDefault();
     let updatedValue = {};
     updatedValue = { gender: e.target.value };
-    e.preventDefault();
     addClick();
     setFormData((prev) => ({ ...prev, ...updatedValue }));
   };
@@ -125,7 +136,7 @@ const AIQueries = () => {
                   </button>
                   <button
                     value={Query[queryNo].option[1]}
-                    onClick={handleInput}
+                    onClick={handleButtonClick}
                     className="placeholder:text-black bg-slate-100 focus:border-[1px] py-[1rem] px-[2rem] rounded-2xl text-[1.5rem] shadow-md focus:shadow-none"
                   >
                     {Query[queryNo].option[1]}
@@ -142,25 +153,42 @@ const AIQueries = () => {
                 <div className="mt-[1rem] flex flex-col gap-[20px]">
                   <label className="custom-select">
                     <select
+                      name="occupation"
                       ref={inputRef}
-                      name=""
                       id
                       className="text-black bg-slate-100 focus:border-[1px] py-[1rem] px-[2rem] rounded-2xl text-[1.5rem] shadow-md focus:shadow-none"
+                      onClick={handleInput}
                     >
-                      <option onClick={handleInput}>
+                      <option value={Query[queryNo].option1}>
                         {Query[queryNo].option1}
                       </option>
-                      <option onClick={handleInput}>
+                      <option value={Query[queryNo].option2}>
                         {Query[queryNo].option2}
                       </option>
-                      <option onClick={handleInput}>{Query[queryNo].option3}</option>
-                      <option onClick={handleInput}>{Query[queryNo].option4}</option>
-                      <option onClick={handleInput}>{Query[queryNo].option5}</option>
-                      <option onClick={handleInput}>{Query[queryNo].option6}</option>
-                      <option onClick={handleInput}>{Query[queryNo].option7}</option>
-                      <option onClick={handleInput}>{Query[queryNo].option8}</option>
-                      <option onClick={handleInput}>{Query[queryNo].option9}</option>
-                      <option onClick={handleInput}>{Query[queryNo].option10}</option>
+                      <option value={Query[queryNo].option3}>
+                        {Query[queryNo].option3}
+                      </option>
+                      <option value={Query[queryNo].option4}>
+                        {Query[queryNo].option4}
+                      </option>
+                      <option value={Query[queryNo].option5}>
+                        {Query[queryNo].option5}
+                      </option>
+                      <option value={Query[queryNo].option6}>
+                        {Query[queryNo].option6}
+                      </option>
+                      <option value={Query[queryNo].option7}>
+                        {Query[queryNo].option7}
+                      </option>
+                      <option value={Query[queryNo].option8}>
+                        {Query[queryNo].option8}
+                      </option>
+                      <option value={Query[queryNo].option9}>
+                        {Query[queryNo].option1}
+                      </option>
+                      <option value={Query[queryNo].option10}>
+                        {Query[queryNo].option10}
+                      </option>
                     </select>
                   </label>
                   <button
@@ -181,10 +209,10 @@ const AIQueries = () => {
                 <div className="mt-[1rem] flex flex-col gap-[20px] items-center justify-center">
                   <div className="flex relative">
                     <input
+                      type={Query[queryNo].dataType}
                       onChange={handleInput}
                       name={Query[queryNo].name}
                       ref={inputRef}
-                      type="text"
                       required
                       className="text-black border-[2px] border-slate-300 focus:border-[1px] focus:border-slate-5008 py-[1rem] px-[2rem] rounded-2xl text-[1.5rem] w-[100%] relative"
                       autoFocus

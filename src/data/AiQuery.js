@@ -22,7 +22,6 @@ export const Query = [
   },
   {
     id: 3,
-    name: "occupation",
     question: "What is your Occupation ?",
     type: "select",
     option1: "Accountant",
@@ -48,7 +47,7 @@ export const Query = [
     name: "height",
     question: "What is your Height ?",
     type: "input",
-    unit: "feet",
+    unit: "meters",
   },
   {
     id: 6,
