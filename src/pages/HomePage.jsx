@@ -9,8 +9,8 @@ const homePage = () => {
   return (
     <div className="bg-[#FBFBFB] [--primaryBody-color] min-[100svh] text-[--text-color] ">
       <div className="border-2 flex items-center ">
-        <i className="bi bi-list"></i>
-        <h1 className=" text-[2rem] font-mRegular text-center flex justify-center gap-2 items-center ">
+        {/* <i className="bi bi-list"></i> */}
+        <h1 className=" text-[2rem] font-mRegular text-center flex justify-center gap-2 items-center  text-center">
           <span className="font-medium ">Health</span>
           <img src={running} width={20} height="auto" />
           <span className="font-medium">Mania</span>
