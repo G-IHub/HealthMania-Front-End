@@ -1,4 +1,5 @@
 import { Query } from "@/data/AiQuery";
+import axios from "axios";
 import { useState, useRef, useEffect } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 const AIQueries = () => {
@@ -6,30 +7,32 @@ const AIQueries = () => {
   const [weight, setWeight] = useState(0);
   const [height, setHeight] = useState(0);
   const [queryNo, setQueryNo] = useState(0);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    "gender":"",
+    "occupation":"Accountant",
+    "sleepDuration":"",
+    "qualityOfSleep":"",
+    "physicalActivity":"",
+    "bmiCategory":"Normal Weight",
+    "heartRate":"",
+    "dailySteps":"",
+    "systolicBP":"",
+    "age":"",
+    "diastolicBP":""
+  });
 
-  useEffect(() => {
-    if (weight > 0 && height > 0) {
-      const bmi = weight / Math.pow(height, 2); // Assuming height is in cm
-      setFormData((prev) => ({
-        ...prev,
-        ["BMI"]: (Math.floor(bmi * 10) / 10).toString(),
-      }));
-    }
-  }, [weight, height]);
+  // useEffect(() => {
+  //   if (weight > 0 && height > 0) {
+  //     const bmi = weight / Math.pow(height, 2); // Assuming height is in cm
+  //     setFormData((prev) => ({
+  //       ...prev,
+  //       ["BMI"]: (Math.floor(bmi * 10) / 10).toString(),
+  //     }));
+  //   }
+  // }, [weight, height]);
 
   const handleInput = (e) => {
-    const { name, value } = e.target;
-    if (name === "weight") {
-      setWeight(parseFloat(value));
-    } else if (name === "height") {
-      setHeight(parseFloat(value));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
+    setFormData({...formData,[e.target.name]:e.target.value})
   };
 
   console.log(weight);
@@ -43,10 +46,10 @@ const AIQueries = () => {
 
   const handleButtonClick = (e) => {
     e.preventDefault();
-    let updatedValue = {};
-    updatedValue = { gender: e.target.value };
+    // let updatedValue = {};
+    // updatedValue = { gender: e.target.value };
     addClick();
-    setFormData((prev) => ({ ...prev, ...updatedValue }));
+    setFormData({...formData,gender:e.target.value});
   };
 
   const handleLeftClick = () => {
@@ -54,13 +57,27 @@ const AIQueries = () => {
   };
 
   const handleSubmitClick = () => {
+    // e.preventDefault()
     let written = inputRef.current.value;
     inputRef.current.value = "";
 
     if (written) {
       queryNo < Query.length - 1 ? addClick() : queryNo;
     }
+    console.log("clicked")
   };
+
+  const handleSubmit=async(e)=>{
+    e.preventDefault()
+    console.log(formData)
+    try {
+      console.log("clicked")
+      const response= await axios.post("https://wellmania-backend.vercel.app/api/v1/prediction",formData)
+      console.log(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   console.log(formData);
   return (
@@ -73,7 +90,7 @@ const AIQueries = () => {
           />
         </div>
         <p className="text-[1rem] w-[60%] text-center select-none">
-          0{1 + queryNo} of {Query.length}
+          {1 + queryNo} of {Query.length}
         </p>
         {/* {queryNo > 0 && (
           <div
@@ -88,36 +105,56 @@ const AIQueries = () => {
       <div className="my-[.5rem] mx-[1rem] flex flex-col ">
         <div className="bg-slate-200 w-[100%] h-[9px] rounded-xl flex">
           {queryNo === 0 ? (
-            <div className="w-[14.2%] h-[9px] bg-orange-500 rounded-xl"></div>
+            <div className="w-[0%] h-[9px] bg-orange-500 rounded-xl"></div>
           ) : queryNo === 1 ? (
             <>
-              <div className="w-[28.4%] h-[9px] bg-orange-500 rounded-xl"></div>
+              <div className="w-[8.3%] h-[9px] bg-orange-500 rounded-xl"></div>
             </>
           ) : queryNo === 2 ? (
             <>
-              <div className="w-[39.5%]  h-[9px] bg-orange-500 rounded-xl"></div>
+              <div className="w-[16.6%]  h-[9px] bg-orange-500 rounded-xl"></div>
             </>
           ) : queryNo === 3 ? (
             <>
-              <div className="w-[50.6%] h-[9px] bg-orange-500 rounded-xl"></div>
+              <div className="w-[24.9%] h-[9px] bg-orange-500 rounded-xl"></div>
             </>
           ) : queryNo === 4 ? (
             <>
-              <div className="w-[62.7%] h-[9px] bg-orange-500 rounded-xl"></div>
+              <div className="w-[33.4%] h-[9px] bg-orange-500 rounded-xl"></div>
             </>
           ) : queryNo === 5 ? (
             <>
-              <div className="w-[68.8%] h-[9px] bg-orange-500 rounded-xl"></div>
+              <div className="w-[41.4%] h-[9px] bg-orange-500 rounded-xl"></div>
             </>
           ) : queryNo === 6 ? (
             <>
-              <div className="w-[80%] h-[9px] bg-orange-500 rounded-xl"></div>
+              <div className="w-[49.8%] h-[9px] bg-orange-500 rounded-xl"></div>
             </>
           ) : queryNo === 7 ? (
             <>
+              <div className="w-[58.1%] h-[9px] bg-orange-500 rounded-xl"></div>
+            </>
+          ) :queryNo === 8 ?(
+            <>
+              <div className="w-[66.4%] h-[9px] bg-orange-500 rounded-xl"></div>
+            </>
+          ): queryNo=== 9 ?(
+            <>
+              <div className="w-[74.7%] h-[9px] bg-orange-500 rounded-xl"></div>
+            </>
+          ): queryNo === 10 ? (
+            <>
+              <div className="w-[83%] h-[9px] bg-orange-500 rounded-xl"></div>
+            </>
+          ): queryNo === 11 ?(
+            <>
+              <div className="w-[91.7%] h-[9px] bg-orange-500 rounded-xl"></div>
+            </>
+          ): queryNo === 12 ?(
+            <>
               <div className="w-[100%] h-[9px] bg-orange-500 rounded-xl"></div>
             </>
-          ) : null}
+          ):null}
         </div>
         <div className="my-[2rem] flex items-center  justify-between h-[70svh] flex-col">
           {Query[queryNo].type === "option" ? (
@@ -158,6 +195,7 @@ const AIQueries = () => {
                       id
                       className="text-black bg-slate-100 focus:border-[1px] py-[1rem] px-[2rem] rounded-2xl text-[1.5rem] shadow-md focus:shadow-none"
                       onClick={handleInput}
+                      required
                     >
                       <option value={Query[queryNo].option1}>
                         {Query[queryNo].option1}
@@ -222,12 +260,21 @@ const AIQueries = () => {
                     </div>
                   </div>
                 </div>
-                <button
-                  onClick={handleSubmitClick}
-                  className="placeholder:text-black bg-slate-100 focus:border-[1px] py-[1rem] px-[2rem] rounded-2xl text-[1.5rem] shadow-md focus:shadow-none mt-[2rem] text-center"
-                >
-                  Next
-                </button>
+                {Query[queryNo].name==="diastolicBP"?
+                  <button
+                    onClick={handleSubmit}
+                    className="placeholder:text-black bg-slate-100 focus:border-[1px] py-[1rem] px-[2rem] rounded-2xl text-[1.5rem] shadow-md focus:shadow-none mt-[2rem] text-center"
+                  >
+                    Submit
+                  </button>
+                  :
+                  <button
+                    onClick={handleSubmitClick}
+                    className="placeholder:text-black bg-slate-100 focus:border-[1px] py-[1rem] px-[2rem] rounded-2xl text-[1.5rem] shadow-md focus:shadow-none mt-[2rem] text-center"
+                  >
+                    Next
+                  </button>
+                }
               </form>
             </div>
           )}

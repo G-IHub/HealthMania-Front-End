@@ -12,16 +12,22 @@ export const Query = [
     unit: "year old",
     type: "input",
   },
-
   {
     id: 2,
-    name: "hours",
+    name: "sleepDuration",
     question: "How many Hours do you Sleep ?",
     unit: "hours",
-    type: "input",
+    type: "input"
   },
   {
     id: 3,
+    name: "qualityOfSleep",
+    question: "Rate your sleep from 1-10?",
+    unit: "",
+    type: "input"
+  },
+  {
+    id: 4,
     question: "What is your Occupation ?",
     type: "select",
     option1: "Accountant",
@@ -36,29 +42,50 @@ export const Query = [
     option10: "Teacher",
   },
   {
-    id: 4,
+    id: 5,
     name: "weight",
     question: "What is your Weight ?",
     type: "input",
-    unit: "kg",
-  },
-  {
-    id: 5,
-    name: "height",
-    question: "What is your Height ?",
-    type: "input",
-    unit: "meters",
+    unit: "kg"
   },
   {
     id: 6,
-    name: "systolicBp",
+    name: "height",
+    question: "What is your Height ?",
+    type: "input",
+    unit: "meters"
+  },
+  {
+    id: 7,
+    name: "physicalActivity",
+    question: "Rate your physical activity from 1-10?",
+    unit: "",
+    type: "input"
+  },
+  {
+    id: 8,
+    name: "dailySteps",
+    question: "How many step do you take today?",
+    type: "input",
+    unit: "steps"
+  },
+  {
+    id: 9,
+    name: "heartRate",
+    question: "What is your heart rate?",
+    type: "input",
+    unit: "bpm",
+  },
+  {
+    id: 10,
+    name: "systolicBP",
     question: "What is your Systolic BP ?",
     type: "input",
     unit: "mmHg",
   },
   {
-    id: 7,
-    name: "diastolicBp",
+    id: 11,
+    name: "diastolicBP",
     question: "What is your Diastolic BP ?",
     type: "input",
     unit: "mmHg",
