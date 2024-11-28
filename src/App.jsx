@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-// import HomePage from "./pages/HomePage";
+import HomePage from "./pages/HomePage";
 import NotificationPage from "./pages/NotificationPage";
 import MyPage from "./pages/MyPage";
 import AiPage from "./pages/AiPage";
@@ -10,20 +10,20 @@ import ExperimentPage from "./sandbox/ExperimentPage";
 
 const App = () => {
   const router = createBrowserRouter([
-    {
-      path: "",
-      element: <ExperimentPage />,
-    },
     // {
-    //   path: "/",
-    //   element: (
-    //     <NavRouter>
-    //       <HomePage />
-    //     </NavRouter>
-    //   ),
+    //   path: "",
+    //   element: <ExperimentPage />,
     // },
     {
-      path: "aiPage",
+      path: "/",
+      element: (
+        <NavRouter>
+          <HomePage />
+        </NavRouter>
+      ),
+    },
+    {
+      path: "aiPage/:AIType",
       element: (
         <NavRouter>
           <AiPage />
@@ -47,7 +47,7 @@ const App = () => {
       ),
     },
     {
-      path: "Aipage/aiQuery",
+      path: "Aipage/aiQuery/:AIType",
       element: <AIQuery />,
     },
     {

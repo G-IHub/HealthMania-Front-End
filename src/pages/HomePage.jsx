@@ -38,6 +38,7 @@ const homePage = () => {
             width={60}
             right={"20px"}
             bottom={"12px"}
+            link="aipage/sleep"
           />
           <HealthFeatures
             title={"Weight"}
@@ -56,6 +57,7 @@ const homePage = () => {
             width={60}
             right={"20px"}
             bottom={"12px"}
+            link="aipage/stress"
           />
         </div>
       </div>

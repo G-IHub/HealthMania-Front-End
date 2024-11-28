@@ -1,9 +1,11 @@
 import doc from "../assets/img/doc.png";
 // import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const AiPage = () => {
   // const questionsAnswered = 0;
+  const { AIType } = useParams();
   return (
     <div className="h-[100svh] py-[40px] overflow-hidden">
       <div>
@@ -19,8 +21,8 @@ const AiPage = () => {
       <div className="w-[100%] pt-[40px] flex justify-center items-center">
         <img className=" " src={doc} />
       </div>
-      <Link to="/Aipage/aiQuery">
-        <div className="fixed text-[20px] bottom-[5rem] w-[100%] h-[70px] bg-black text-white flex justify-center items-center cursor-pointer hover:bg-slate-300 hover:text-orange-500">
+      <Link to={`/Aipage/aiQuery/${AIType}`}>
+        <div className="fixed text-[20px] bottom-0 w-[100%] h-[70px] bg-black text-white flex justify-center items-center cursor-pointer hover:bg-slate-300 hover:text-orange-500">
           BEGIN
         </div>
       </Link>
